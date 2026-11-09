@@ -142,7 +142,7 @@ def specimen(theme, d, sample):
         ("HABITAT", "macOS · terminal · Everforest"),
         ("GROWING", "Project Grove"),
         ("FIELD KIT", "JetBrains Mono · SF Pro · zsh · git"),
-        ("SINCE", f"{since} · {d['repos']} public repos"),
+        ("SINCE", f"{since} · {d['repos']} public repo{'' if d['repos'] == 1 else 's'}"),
     ]
     body = [
         f'<text x="40" y="104" font-size="34" font-weight="700" fill="{t["accent"]}">&gt;</text>',
