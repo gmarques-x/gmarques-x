@@ -28,6 +28,7 @@ A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third
 - [x] Everforest design study and palette
 - [x] Fonts: JetBrains Mono and SF Pro, installed by script
 - [x] Finder settings recorded and reproducible
+- [x] Signed commits with an SSH key
 - [ ] grove-dotfiles installer
 - [ ] Terminal, shell and editor
 
