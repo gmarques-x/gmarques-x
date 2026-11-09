@@ -1,12 +1,12 @@
-<p align="center">
-  <img src="assets/project-grove-banner.png" width="100%" alt="Project Grove: a complete macOS desktop overhaul. Beautiful terminal, powerful apps, seamless theming, a more focused Mac.">
-</p>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-light.svg">
   <img width="100%" alt="Field notes, specimen card. gmarques-x. Habitat: macOS, terminal, Everforest. Growing: Project Grove. Field kit: JetBrains Mono, SF Pro, zsh, git." src="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-light.svg">
 </picture>
+
+<p align="center">
+  <img src="assets/project-grove-banner.png" width="100%" alt="Project Grove: a complete macOS desktop overhaul. Beautiful terminal, powerful apps, seamless theming, a more focused Mac.">
+</p>
 
 ### Field notes
 
