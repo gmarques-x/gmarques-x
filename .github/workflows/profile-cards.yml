@@ -34,6 +34,9 @@ jobs:
             dist/snake-dark.svg?color_snake=#DBBC7F&color_dots=#343F44,#425047,#596763,#859289,#A7C080
             dist/snake-light.svg?color_snake=#DFA000&color_dots=#E6E2CC,#BDC3AF,#939F91,#35A77C,#8DA101
 
+      - name: Check colours against Everforest
+        run: python3 scripts/check_palette.py
+
       - name: Render field-notes cards
         run: python3 scripts/render.py --out dist
         env:
