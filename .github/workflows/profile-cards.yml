@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # Dots step from the empty day to Everforest green, every step a palette
+      # Dots step from the empty day to the deepest green, every step a palette
       # colour (dark medium, light medium; scripts/check_palette.py checks).
       - name: Draw contribution animation
         uses: Platane/snk/svg-only@v3
@@ -32,7 +32,7 @@ jobs:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
             dist/snake-dark.svg?color_snake=#DBBC7F&color_dots=#343F44,#425047,#596763,#859289,#A7C080
-            dist/snake-light.svg?color_snake=#DFA000&color_dots=#E6E2CC,#BDC3AF,#939F91,#35A77C,#8DA101
+            dist/snake-light.svg?color_snake=#DFA000&color_dots=#E6E2CC,#BDC3AF,#939F91,#8DA101,#35A77C
 
       - name: Check colours against Everforest
         run: python3 scripts/check_palette.py
