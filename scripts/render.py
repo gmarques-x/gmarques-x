@@ -20,8 +20,8 @@ from xml.sax.saxutils import escape
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LOGIN = os.environ.get("PROFILE_LOGIN", "gmarques-x")
 
-# Everforest (github.com/sainnhe/everforest). Dark = medium, light = soft.
-# Values marked "derived" are not in the upstream palette.
+# Everforest (github.com/sainnhe/everforest), dark medium and light medium.
+# Every colour must be in scripts/everforest.json (scripts/check_palette.py checks).
 THEMES = {
     "dark": {
         "paper": "#2D353B",   # bg0
@@ -36,18 +36,19 @@ THEMES = {
         "langs": ["#A7C080", "#83C092", "#7FBBB3", "#D699B6", "#DBBC7F", "#E69875", "#E67E80"],
     },
     "light": {
-        "paper": "#F3EAD3",   # bg0 (soft)
-        "grid": "#EAE4CA",    # bg1 (soft)
-        "rule": "#D8D3BA",    # bg4 (soft)
-        "ink": "#3D484D",     # dark bg2: deeper than light fg so small text stays readable (derived use)
-        "muted": "#5C6A72",   # fg
-        "faint": "#708089",   # statusline2: grey2 is too faint for small labels on paper
-        "accent": "#708F2E",  # derived: green darkened for text contrast on paper
+        "paper": "#FDF6E3",   # bg0
+        "grid": "#F4F0D9",    # bg1
+        "rule": "#E0DCC7",    # bg4
+        "ink": "#5C6A72",     # fg, the light scheme's text colour
+        "muted": "#5C6A72",   # fg: no light grey is dark enough for small notes
+        "faint": "#829181",   # grey2, the scheme's darkest grey (its "dim")
+        "accent": "#8DA101",  # green
         "cursor": "#DFA000",  # yellow
-        "dots": ["#3D484D", "#5C7A3A", "#8DA101", "#DFA000"],
+        "dots": ["#5C6A72", "#35A77C", "#8DA101", "#DFA000"],
         "langs": ["#8DA101", "#35A77C", "#3A94C5", "#DF69BA", "#DFA000", "#F57D26", "#F85552"],
     },
 }
+
 
 W = 840
 

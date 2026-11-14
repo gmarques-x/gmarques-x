@@ -24,15 +24,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Dot colors step from the empty-day color to Everforest green.
-      # The in-between greens are derived; the ends come from the palette.
+      # Dots step from the empty day to Everforest green, every step a palette
+      # colour (dark medium, light medium; scripts/check_palette.py checks).
       - name: Draw contribution animation
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/snake-dark.svg?color_snake=#DBBC7F&color_dots=#343F44,#425047,#5E7552,#83A06A,#A7C080
-            dist/snake-light.svg?color_snake=#DFA000&color_dots=#EAE4CA,#E5E6C5,#C3CF8A,#A6B84E,#8DA101
+            dist/snake-dark.svg?color_snake=#DBBC7F&color_dots=#343F44,#425047,#596763,#859289,#A7C080
+            dist/snake-light.svg?color_snake=#DFA000&color_dots=#E6E2CC,#BDC3AF,#939F91,#35A77C,#8DA101
 
       - name: Render field-notes cards
         run: python3 scripts/render.py --out dist
