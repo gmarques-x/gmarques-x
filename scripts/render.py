@@ -137,12 +137,15 @@ def tree_rings(t, cx, cy, r_max, count):
 
 def specimen(theme, d, sample):
     t = THEMES[theme]
-    h = 300
+    h = 356
     since = d["created"][:4]
     rows = [
-        ("HABITAT", "macOS · terminal · Everforest"),
-        ("GROWING", "Project Grove"),
-        ("FIELD KIT", "JetBrains Mono · SF Pro · zsh · git"),
+        ("HABITAT", "macOS · Everforest, six schemes"),
+        ("GROWING", "Project Grove, set up by one installer"),
+        ("APPS", "Grove Keys · Grove Explorer · Grove Themes"),
+        ("TERMINAL", "Ghostty · zsh · Starship"),
+        ("DESKTOP", "AeroSpace · SketchyBar · wallpapers"),
+        ("FIELD KIT", "JetBrains Mono · SF Pro · a Claude Code mod"),
         ("SINCE", f"{since} · {d['repos']} public repo{'' if d['repos'] == 1 else 's'}"),
     ]
     body = [
@@ -151,13 +154,13 @@ def specimen(theme, d, sample):
         f'<rect x="{82 + len(LOGIN) * 20.4 + 6:.0f}" y="76" width="14" height="34" fill="{t["cursor"]}"/>',
     ]
     for i, (k, v) in enumerate(rows):
-        y = 150 + i * 28
+        y = 144 + i * 24
         body.append(f'<text x="40" y="{y}" class="lbl" fill="{t["faint"]}">{k}</text>')
         body.append(f'<text x="160" y="{y}" class="val" fill="{t["ink"]}">{escape(v)}</text>')
     for i, c in enumerate(t["dots"]):
         body.append(f'<circle cx="{48 + i * 22}" cy="{h - 44}" r="7" fill="{c}"/>')
 
-    cx, cy, rmax = 670, 150, 82
+    cx, cy, rmax = 670, 176, 82
     rings = 6 + min(d["repos"], 10)
     body.append(tree_rings(t, cx, cy, rmax, rings))
     # dimension line under the cross-section, like the avatar
