@@ -196,7 +196,10 @@ def stats(theme, d, sample):
     lx, lw = 480, 320
     body.append(f'<line x1="{lx - 22}" y1="80" x2="{lx - 22}" y2="{h - 40}" stroke="{t["rule"]}" stroke-width="1"/>')
     body.append(f'<text x="{lx}" y="98" class="lbl" fill="{t["faint"]}">TOP LANGUAGES</text>')
+    # Shares are of the top five; a trace that would print as 0.0% is left out.
     langs = d["languages"][:5]
+    total = sum(s for _, s in langs)
+    langs = [(n, s) for n, s in langs if 100 * s / total >= 0.05] if total else []
     total = sum(s for _, s in langs)
     if not total:
         body.append(f'<text x="{lx}" y="132" class="val" fill="{t["muted"]}">No specimens collected yet.</text>')
@@ -274,7 +277,7 @@ SAMPLE = {
     "contributions": 42,
     "commits": 37,
     "prs": 2,
-    "languages": [("Shell", 9200), ("JavaScript", 3100), ("Python", 2400), ("HTML", 1800)],
+    "languages": [("Shell", 9200), ("JavaScript", 3100), ("Python", 2400), ("HTML", 1800), ("CSS", 4)],
 }
 
 
