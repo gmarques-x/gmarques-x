@@ -14,7 +14,10 @@ Notes from a Mac that is being rebuilt one config at a time. Everything here gro
 
 ### [Project Grove](https://github.com/gmarques-x/project-grove)
 
-<img src="assets/project-grove-logo.png" align="right" width="112" alt="Project Grove app icon: a pine tree over a misty forest.">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/project-grove-logo-night.png">
+  <img src="assets/project-grove-logo-paper.png" align="right" width="112" alt="Project Grove logo: a pencil-drawn pine inside a survey ring and cross, on parchment.">
+</picture>
 
 A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third-party tools adapted to fit, all in Everforest.
 

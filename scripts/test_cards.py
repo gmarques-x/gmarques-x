@@ -143,5 +143,31 @@ class Fonts(unittest.TestCase):
         self.assertTrue((FONTS / "OFL-im-fell-english.txt").exists())
 
 
+class Logo(unittest.TestCase):
+    def test_logo_pictures(self):
+        """The Project Grove logo: a Paper and a Night PNG, square, shown with
+        <picture> in the README (Night for dark readers, Paper otherwise)."""
+        import struct
+        for scheme in ("paper", "night"):
+            png = ROOT / "assets" / f"project-grove-logo-{scheme}.png"
+            self.assertTrue(png.exists(), png.name)
+            head = png.read_bytes()[:24]
+            self.assertEqual(head[:8], b"\x89PNG\r\n\x1a\n", png.name)
+            width, height = struct.unpack(">II", head[16:24])
+            self.assertEqual(width, height, png.name)
+            self.assertGreaterEqual(width, 224, png.name)
+        self.assertFalse((ROOT / "assets" / "project-grove-logo.png").exists())
+        readme = (ROOT / "README.md").read_text()
+        block = re.search(r"<picture>((?:(?!</picture>).)*project-grove-logo(?:(?!</picture>).)*)</picture>", readme, re.S)
+        self.assertIsNotNone(block, "the logo is not in a <picture>")
+        body = block.group(1)
+        self.assertRegex(body, r'<source media="\(prefers-color-scheme: dark\)" srcset="assets/project-grove-logo-night\.png">')
+        img = re.search(r"<img [^>]*>", body)
+        self.assertIsNotNone(img)
+        self.assertIn('src="assets/project-grove-logo-paper.png"', img.group(0))
+        self.assertRegex(img.group(0), r'alt="[^"]{10,}"')
+        self.assertIn('width="112"', img.group(0))
+
+
 if __name__ == "__main__":
     unittest.main()

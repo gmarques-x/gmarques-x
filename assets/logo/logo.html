@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project Grove logo</title>
+<!-- The Project Grove logo beside the Project Grove section of the profile
+     README: the pine of the Project Grove lockup in the field atlas's pencil
+     hand, on a square of parchment with a faint survey ring and cross (the
+     frame of the Project Grove app icons, in Atlas). Drawn at 150 x 150 and
+     shot at 2x (300 x 300) by make-logo.sh; the README shows it 112 px wide.
+     logo.html is Atlas Paper; logo.html#night is Atlas Night.
+
+     The corners are rounded, 14 px in this frame (about 10 px at 112 px),
+     and transparent outside, as on the Project Grove banner (Plate II).
+     No text: it is a small mark.
+
+     Parts, copied from Project Grove (github.com/gmarques-x/project-grove):
+       the ground  docs/design/kit/background.html (Atlas Paper and Night:
+                   colours, glow, grid, edge shading, mottle and grain), as
+                   Plate II (assets/banner/plate-project-grove.html) uses it;
+                   changed for a 150 px square, see .sheet and the textures
+       the pine    docs/design/kit/pine-inked.svg (the 15 points and two cuts
+                   of docs/design/kit/pine.svg), with Plate II's inks;
+                   strokes and hatching made heavier, see .pine
+       the ring    the survey ring and cross of assets/app-icons/make.swift,
+                   in Atlas's label ink, as Plate II draws its survey lines -->
+<style>
+/* Atlas Paper and Atlas Night: the kit's ground colours, and Plate II's line
+   ink (--line) and the opacities of its pencil drawings (--sketch) and survey
+   lines (--furniture). */
+:root{--paper:#E6D7B2;--line:#5A4328;
+  --glow:rgba(255,250,233,.6);--glow0:rgba(255,250,233,0);
+  --fox1:rgba(150,100,40,.14);--fox0:rgba(150,100,40,0);
+  --grid:rgba(90,62,30,.06);--edge1:rgba(120,72,22,.38);--edge2:rgba(120,72,22,.26);
+  --sketch:.86;--furniture:.5}
+:root.night{--paper:#1F272A;--line:#A9A08C;
+  --glow:rgba(58,68,72,.38);--glow0:rgba(58,68,72,0);
+  --fox1:rgba(0,0,0,0);--fox0:rgba(0,0,0,0);
+  --grid:rgba(169,160,140,.055);--edge1:rgba(8,11,12,.62);--edge2:rgba(8,11,12,.42);
+  --sketch:.9;--furniture:.45}
+html,body{margin:0;width:150px;height:150px;overflow:hidden;background:transparent}
+/* The kit's sheet on a 150 px square. Its inset edge shading (200 px and
+   60 px blur on the 932 px tall plate) is scaled by 150/932 (32 px and
+   10 px); the binding gutter on the left is left out (it would shade half
+   the square); one spot of foxing instead of three; the 48 px grid becomes
+   a 25 px grid (six cells a side, centred on the cross). */
+.sheet{position:absolute;left:0;top:0;width:150px;height:150px;overflow:hidden;border-radius:14px;background-color:var(--paper);
+  background-image:radial-gradient(ellipse 80% 70% at 42% 36%, var(--glow), var(--glow0) 72%),
+    radial-gradient(circle at 84% 82%, var(--fox1), var(--fox0) 14%),
+    linear-gradient(var(--grid) 1px, rgba(0,0,0,0) 1px),
+    linear-gradient(90deg, var(--grid) 1px, rgba(0,0,0,0) 1px);
+  background-size:auto,auto,25px 25px,25px 25px;background-position:0 0,0 0,0 0,0 0;
+  box-shadow:inset 0 0 32px var(--edge1), inset 0 0 10px var(--edge2)}
+.tex{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.tex-night,:root.night .tex-paper{display:none}
+:root.night .tex-night{display:block}
+.layer{position:absolute;left:0;top:0;width:150px;height:150px;overflow:visible}
+.furniture{color:var(--line);opacity:var(--furniture)}
+/* The pine: 116 px tall box, centred. At the README's 112 px the kit's
+   strokes (.3 and .26 units) and hatching (.45 units) fall under a pixel,
+   so they are about doubled here; the hand filters keep their numbers. */
+.pine{position:absolute;left:17px;top:15px;width:116px;height:116px;color:var(--line);opacity:var(--sketch);overflow:visible}
+</style>
+<script>if(location.hash==='#night')document.documentElement.classList.add('night');</script>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- The kit's textures. The mottle's frequency is raised from .007 .011
+       (drawn for a 1440 px sheet) to .03 .045, so a 150 px square still
+       shows its clouding; the grain is the kit's. -->
+  <svg class="tex tex-paper" aria-hidden="true" style="mix-blend-mode:multiply;opacity:.6">
+    <defs>
+      <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".03 .045" numOctaves="3" seed="11"/><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .38  0 0 0 0 .18  1.2 0 0 0 -.52"/></filter>
+      <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .40  0 0 0 0 .28  0 0 0 0 .14  .62 0 0 0 -.17"/></filter>
+    </defs>
+    <rect width="100%" height="100%" filter="url(#mottle)"/>
+    <rect width="100%" height="100%" filter="url(#grain)"/>
+  </svg>
+  <svg class="tex tex-night" aria-hidden="true">
+    <defs>
+      <filter id="mottle-n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".03 .045" numOctaves="3" seed="11"/><feColorMatrix values="0 0 0 0 .04  0 0 0 0 .055  0 0 0 0 .06  1.1 0 0 0 -.5"/></filter>
+      <filter id="grain-n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .85  0 0 0 0 .82  0 0 0 0 .74  .22 0 0 0 -.075"/></filter>
+    </defs>
+    <rect width="100%" height="100%" filter="url(#mottle-n)"/>
+    <rect width="100%" height="100%" filter="url(#grain-n)"/>
+  </svg>
+
+  <!-- The survey ring and cross, centred: a ring with a fainter inner dashed
+       ring (the compass's), a tick at each cardinal point, and the cross
+       running out to the shaded edge. The cross stops at the pine: the mask
+       is the pine's outline in the pine's box (17, 15, 116 px for 40 units),
+       grown a little. -->
+  <svg class="layer furniture" aria-hidden="true" viewBox="0 0 150 150" fill="none" stroke="currentColor">
+    <defs>
+      <mask id="behind-pine" maskUnits="userSpaceOnUse" x="0" y="0" width="150" height="150">
+        <rect width="150" height="150" fill="#FFFFFF"/>
+        <path transform="translate(17 15) scale(2.9)" fill="#000000" stroke="#000000" stroke-width="1.6" stroke-linejoin="round" d="M20,2 L27,12 L23,12 L30,21 L25,21 L33,31 L22,31 L22,38 L18,38 L18,31 L7,31 L15,21 L10,21 L17,12 L13,12 Z"/>
+      </mask>
+    </defs>
+    <g opacity=".55" stroke-width=".8" mask="url(#behind-pine)">
+      <path d="M75 12V138M12 75H138"/>
+    </g>
+    <circle cx="75" cy="75" r="58" stroke-width="1"/>
+    <circle cx="75" cy="75" r="53" stroke-width=".7" stroke-dasharray="1.5 2.5" opacity=".7"/>
+    <path d="M75 13V21M75 129V137M13 75H21M129 75H137" stroke-width="1.2"/>
+  </svg>
+
+  <!-- The pine: docs/design/kit/pine-inked.svg, copied; stroke .3 -> .6,
+       cuts .26 -> .5, second pass .2 -> .35, hatching every .45 -> .9 units
+       with line .15 -> .3, wash .12 -> .16. -->
+  <svg class="pine" aria-hidden="true" viewBox="0 0 40 40" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <defs>
+      <path id="pine" stroke="currentColor" d="M20,2 L27,12 L23,12 L30,21 L25,21 L33,31 L22,31 L22,38 L18,38 L18,31 L7,31 L15,21 L10,21 L17,12 L13,12 Z"/>
+      <path id="cuts" stroke="currentColor" d="M16,12.6 L20,7 L24,12.6 M14,22.25 L20,14.75 L26,22.25"/>
+      <clipPath id="pine-clip"><use href="#pine"/></clipPath>
+      <filter id="pine-hand" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".2" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale=".55" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="pine-hand2" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".28" numOctaves="2" seed="23"/><feDisplacementMap in="SourceGraphic" scale=".62" xChannelSelector="G" yChannelSelector="R"/></filter>
+      <pattern id="pine-hatch" patternUnits="userSpaceOnUse" width=".9" height=".9" patternTransform="rotate(38)"><path d="M0 .45H.9" stroke="currentColor" stroke-width=".3"/></pattern>
+    </defs>
+    <g filter="url(#pine-hand2)" opacity=".45" stroke-width=".35" transform="translate(.35 -.25)">
+      <use href="#pine"/>
+    </g>
+    <g filter="url(#pine-hand)">
+      <use href="#pine" fill="currentColor" fill-opacity=".16" stroke="none"/>
+      <g clip-path="url(#pine-clip)">
+        <rect x="20" y="0" width="20" height="40" fill="url(#pine-hatch)"/>
+        <use href="#cuts" stroke-width=".5"/>
+      </g>
+      <use href="#pine" stroke-width=".6"/>
+    </g>
+  </svg>
+
+</div>
+</body>
+</html>
