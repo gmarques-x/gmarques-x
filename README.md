@@ -18,7 +18,7 @@ Notes from a Mac that is being rebuilt one config at a time. Everything here is 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/project-grove-logo-night.png">
-  <img src="assets/project-grove-logo-paper.png" align="right" width="112" alt="Project Grove logo: a pencil-drawn pine inside a survey ring and cross, on parchment.">
+  <img src="assets/project-grove-logo-paper.png" align="right" width="112" alt="Project Grove logo: a pencil-drawn pine inside a survey ring and cross, on parchment or slate.">
 </picture>
 
 A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third-party tools adapted to fit, all drawn in Atlas, grown from Everforest.
