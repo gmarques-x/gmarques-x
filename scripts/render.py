@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the profile's field-notes cards as SVG, in Everforest dark and light.
+"""Render the profile's field-notes cards as SVG, in Atlas Night and Atlas Paper.
 
     python3 scripts/render.py --out dist                 # live data (needs GITHUB_TOKEN)
     python3 scripts/render.py --out dist --sample        # sample data, marked as such
@@ -20,32 +20,33 @@ from xml.sax.saxutils import escape
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LOGIN = os.environ.get("PROFILE_LOGIN", "gmarques-x")
 
-# Everforest (github.com/sainnhe/everforest), dark medium and light medium.
-# Every colour must be in scripts/everforest.json (scripts/check_palette.py checks).
+# Atlas Paper (light) and Atlas Night (dark), Project Grove's field-atlas palettes.
+# Every colour must be in scripts/atlas.json (scripts/check_palette.py checks).
+# Orange is for marks only (corner brackets, prompt, cursor, snake), never small text.
 THEMES = {
     "dark": {
-        "paper": "#2D353B",   # bg0
-        "grid": "#343F44",    # bg1
-        "rule": "#4F585E",    # bg4
-        "ink": "#D3C6AA",     # fg
-        "muted": "#9DA9A0",   # grey2
-        "faint": "#859289",   # grey1
-        "accent": "#A7C080",  # green
-        "cursor": "#DBBC7F",  # yellow
-        "dots": ["#425047", "#83C092", "#A7C080", "#DBBC7F"],
-        "langs": ["#A7C080", "#83C092", "#7FBBB3", "#D699B6", "#DBBC7F", "#E69875", "#E67E80"],
+        "paper": "#1F272A",   # Night bg0
+        "grid": "#272E2F",    # the kit's grid line mixed onto Night
+        "rule": "#434E52",    # bg4
+        "ink": "#EFE6D2",     # fg
+        "muted": "#D9CFBA",   # grey2
+        "faint": "#A9A08C",   # grey1, the label ink
+        "accent": "#F07A1F",  # the marker orange
+        "cursor": "#F07A1F",  # the marker orange
+        "dots": ["#434E52", "#86D6C9", "#AED58A", "#E8CB6C"],
+        "langs": ["#AED58A", "#86D6C9", "#93C0E3", "#DDA6D6", "#E8CB6C", "#D8CBAE", "#AEB6D6"],
     },
     "light": {
-        "paper": "#FDF6E3",   # bg0
-        "grid": "#F4F0D9",    # bg1
-        "rule": "#E0DCC7",    # bg4
-        "ink": "#5C6A72",     # fg, the light scheme's text colour
-        "muted": "#5C6A72",   # fg: no light grey is dark enough for small notes
-        "faint": "#829181",   # grey2, the scheme's darkest grey (its "dim")
-        "accent": "#8DA101",  # green
-        "cursor": "#DFA000",  # yellow
-        "dots": ["#5C6A72", "#35A77C", "#8DA101", "#DFA000"],
-        "langs": ["#8DA101", "#35A77C", "#3A94C5", "#DF69BA", "#DFA000", "#F57D26", "#F85552"],
+        "paper": "#E6D7B2",   # Paper bg_dim
+        "grid": "#DECEA9",    # the kit's grid line mixed onto Paper
+        "rule": "#D9C79E",    # bg4
+        "ink": "#2E261B",     # fg
+        "muted": "#5A4328",   # grey2, the label ink
+        "faint": "#5A4328",   # grey2: grey1 (#7A6347) is only 3.98:1 on this paper
+        "accent": "#F07A1F",  # the marker orange
+        "cursor": "#F07A1F",  # the marker orange
+        "dots": ["#C9B48C", "#1A625B", "#3B6027", "#6A530E"],
+        "langs": ["#3B6027", "#1A625B", "#2B5576", "#713F6C", "#6A530E", "#3A2F22", "#2C3350"],
     },
 }
 

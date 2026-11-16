@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""Fail if a card or the snake uses a colour that is not in Everforest.
+"""Fail if a card or the snake uses a colour that is not in Atlas.
 
     python3 scripts/check_palette.py
 
-The allowed colours are in scripts/everforest.json, copied from Project Grove's
-scheme files: dark medium for the dark cards, light medium for the light ones.
-Each dark colour must come from the dark scheme and each light one from the
-light scheme; any other hex in the checked files must be in one of the two.
+The allowed colours are in scripts/atlas.json, copied from Project Grove's
+scheme files (Atlas Night for the dark cards, Atlas Paper for the light ones),
+the seven territory colours of the field atlas, and the plate's grid line
+mixed onto each paper. Each dark colour must come from the dark scheme (or the
+territory colours or the dark grid) and each light one from the light scheme
+(or the territory colours or the light grid); any other hex in the checked
+files must be in one of the two.
 """
 import json
 import pathlib
@@ -25,8 +28,12 @@ def hexes(value):
 
 
 def main():
-    palette = json.loads((HERE / "everforest.json").read_text())
-    allowed = {theme: set(palette[theme].values()) for theme in ("dark", "light")}
+    palette = json.loads((HERE / "atlas.json").read_text())
+    territory = {h.upper() for triplet in palette["territory"].values() for h in triplet.values()}
+    allowed = {
+        theme: {h.upper() for h in palette[theme].values()} | territory | {palette[f"plate_grid_{theme}"].upper()}
+        for theme in ("dark", "light")
+    }
     sys.path.insert(0, str(HERE))
     from render import THEMES
 
@@ -34,25 +41,25 @@ def main():
     for theme, colours in THEMES.items():
         for h in hexes(colours):
             if h not in allowed[theme]:
-                errors.append(f"render.py THEMES[{theme!r}]: {h} is not in Everforest {theme} medium")
+                errors.append(f"render.py THEMES[{theme!r}]: {h} is not in Atlas {'Night' if theme == 'dark' else 'Paper'}")
     for n, line in enumerate(WORKFLOW.read_text().splitlines(), 1):
         for theme in ("dark", "light"):
             if f"snake-{theme}" in line:
                 for h in hexes(line):
                     if h not in allowed[theme]:
-                        errors.append(f"{WORKFLOW.name}:{n}: {h} is not in Everforest {theme} medium")
+                        errors.append(f"{WORKFLOW.name}:{n}: {h} is not in Atlas {'Night' if theme == 'dark' else 'Paper'}")
     every = allowed["dark"] | allowed["light"]
     for path in (HERE / "render.py", WORKFLOW):
         for n, line in enumerate(path.read_text().splitlines(), 1):
             for h in hexes(line):
                 if h not in every:
-                    errors.append(f"{path.name}:{n}: {h} is not an Everforest colour")
+                    errors.append(f"{path.name}:{n}: {h} is not an Atlas colour")
 
     for e in dict.fromkeys(errors):  # same hex can be caught twice; say it once
         print(e)
     if errors:
         sys.exit(1)
-    print("palette ok: every colour is from Everforest")
+    print("palette ok: every colour is from Atlas")
 
 
 if __name__ == "__main__":

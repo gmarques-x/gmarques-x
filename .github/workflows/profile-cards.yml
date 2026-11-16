@@ -24,17 +24,17 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      # Dots step from the empty day to the deepest green, every step a palette
-      # colour (dark medium, light medium; scripts/check_palette.py checks).
+      # Dots step from the empty day to the marker orange, every step a palette
+      # colour (Atlas Night, Atlas Paper; scripts/check_palette.py checks).
       - name: Draw contribution animation
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/snake-dark.svg?color_snake=#DBBC7F&color_dots=#343F44,#425047,#596763,#859289,#A7C080
-            dist/snake-light.svg?color_snake=#DFA000&color_dots=#E6E2CC,#BDC3AF,#939F91,#8DA101,#35A77C
+            dist/snake-dark.svg?color_snake=#F07A1F&color_dots=#283236,#3A4448,#4D585C,#E8CB6C,#F07A1F
+            dist/snake-light.svg?color_snake=#F07A1F&color_dots=#EADCB9,#D9C79E,#C9B48C,#6A530E,#F07A1F
 
-      - name: Check colours against Everforest
+      - name: Check colours against Atlas
         run: python3 scripts/check_palette.py
 
       - name: Render field-notes cards
