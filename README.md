@@ -1,16 +1,18 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-light.svg">
-  <img width="100%" alt="Field notes, specimen card. gmarques-x. Habitat: macOS, Everforest in six schemes. Growing: Project Grove, set up by one installer. Apps: Grove Keys, Grove Explorer, Grove Themes. Terminal: Ghostty, zsh, Starship. Desktop: AeroSpace, SketchyBar, wallpapers. Field kit: JetBrains Mono, SF Pro, a Claude Code mod." src="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-light.svg">
+  <img width="100%" alt="Field notes, specimen card. gmarques-x. Habitat: macOS, Atlas Paper and Night, grown from Everforest. Growing: Project Grove, set up by one installer. Apps: Grove Keys, Grove Explorer, Grove Themes. Terminal: Ghostty, zsh, Starship. Desktop: AeroSpace, SketchyBar, wallpapers. Field kit: JetBrains Mono, SF Pro, a Claude Code mod." src="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/specimen-light.svg">
 </picture>
 
 <p align="center">
-  <a href="https://github.com/gmarques-x/project-grove"><img src="assets/project-grove-banner.png" width="100%" alt="Project Grove: a complete macOS desktop overhaul. Beautiful terminal, powerful apps, seamless theming, a more focused Mac."></a>
+  <a href="https://github.com/gmarques-x/project-grove"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/project-grove-banner-night.png">
+    <img src="assets/project-grove-banner-paper.png" width="100%" alt="Plate II · A Field Guide to the Desktop. Project Grove: a complete macOS desktop overhaul. Beautiful terminal, powerful apps, seamless theming, a more focused Mac."></picture></a>
 </p>
 
 ### Field notes
 
-Notes from a Mac that is being rebuilt one config at a time. Everything here grows from the same ground: the [Everforest](https://github.com/sainnhe/everforest) palette, JetBrains Mono for code and SF Pro for everything else. Every change is recorded, so the whole setup can be planted again on a fresh machine.
+Notes from a Mac that is being rebuilt one config at a time. Everything here is drawn as a field atlas: parchment and slate, an orange marker, IM Fell English for what the surveyor writes and JetBrains Mono for the instruments. The colours are Atlas, grown from the [Everforest](https://github.com/sainnhe/everforest) palette by sainnhe. Every change is recorded, so the whole setup can be planted again on a fresh machine.
 
 ### [Project Grove](https://github.com/gmarques-x/project-grove)
 
@@ -19,7 +21,7 @@ Notes from a Mac that is being rebuilt one config at a time. Everything here gro
   <img src="assets/project-grove-logo-paper.png" align="right" width="112" alt="Project Grove logo: a pencil-drawn pine inside a survey ring and cross, on parchment.">
 </picture>
 
-A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third-party tools adapted to fit, all in Everforest.
+A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third-party tools adapted to fit, all drawn in Atlas, grown from Everforest.
 
 - **Beautiful terminal.** Shell, prompt and terminal tuned to one palette and one typeface.
 - **Powerful apps.** Small tools built for the setup, and familiar apps adapted to it.
@@ -28,7 +30,7 @@ A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third
 
 **Growth log**
 
-- [x] Everforest design study and palette
+- [x] Everforest design study and palette, the roots
 - [x] Fonts: JetBrains Mono and SF Pro, installed by script
 - [x] Finder settings recorded and reproducible
 - [x] Signed commits with an SSH key
@@ -37,9 +39,13 @@ A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third
 - [x] The desktop: AeroSpace tiling and a SketchyBar bar in place of the menu bar
 - [x] Grove Keys: Caps Lock as a Hyper key, launchers and the bar's menus
 - [x] Grove Explorer: a file browser with one pane or two
-- [x] Grove Themes: switch everything between the six Everforest schemes
+- [x] Grove Themes: switch everything between eight schemes
 - [x] Wallpapers, two for each scheme
 - [x] A Claude Code mod: an agents pane, in colours that follow Grove Themes
+- [x] The Atlas schemes: Atlas Paper and Atlas Night
+- [x] The Field Atlas map
+- [x] The [Atlas design reference](https://github.com/gmarques-x/project-grove/tree/main/docs/design)
+- [x] App icons and banners in Atlas
 
 ### Measurements
 
@@ -55,4 +61,4 @@ A complete macOS desktop overhaul: dotfiles, small purpose-built apps, and third
   <img width="100%" alt="Animated contribution graph for the past year." src="https://raw.githubusercontent.com/gmarques-x/gmarques-x/output/snake-light.svg">
 </picture>
 
-<p align="center"><sub>Set in JetBrains Mono · colours from <a href="https://github.com/sainnhe/everforest">Everforest</a> by sainnhe · cards redrawn daily</sub></p>
+<p align="center"><sub>Set in IM Fell English and JetBrains Mono · colours from Atlas, grown from <a href="https://github.com/sainnhe/everforest">Everforest</a> by sainnhe · cards redrawn daily</sub></p>
