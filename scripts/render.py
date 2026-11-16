@@ -55,13 +55,21 @@ W = 840
 
 
 def font_css():
+    """JetBrains Mono for the figures; IM Fell English for what the surveyor writes:
+    'Fell' (italic) for the notes, 'FellSC' (small caps) for the labels."""
     fonts = ROOT / "assets" / "fonts"
+    faces = (
+        ("JBM", "normal", 400, "jetbrains-mono-regular"),
+        ("JBM", "normal", 700, "jetbrains-mono-bold"),
+        ("Fell", "italic", 400, "im-fell-english-italic"),
+        ("FellSC", "normal", 400, "im-fell-english-sc"),
+    )
     css = []
-    for weight, name in ((400, "regular"), (700, "bold")):
-        data = (fonts / f"jetbrains-mono-{name}.woff2.b64").read_text().strip()
+    for family, style, weight, name in faces:
+        data = (fonts / f"{name}.woff2.b64").read_text().strip()
         css.append(
-            "@font-face{font-family:'JBM';font-weight:%d;"
-            "src:url(data:font/woff2;base64,%s) format('woff2');}" % (weight, data)
+            "@font-face{font-family:'%s';font-style:%s;font-weight:%d;"
+            "src:url(data:font/woff2;base64,%s) format('woff2');}" % (family, style, weight, data)
         )
     return "".join(css)
 
@@ -82,12 +90,13 @@ def frame(theme, height, title, right_label, body, sample):
     )
     right_fill = t["faint"]
     if sample:  # make sample renders impossible to mistake for real data
-        right_label, right_fill = "SAMPLE DATA", t["cursor"]
+        right_label, right_fill = "Sample data", t["ink"]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{height}" viewBox="0 0 {W} {height}" role="img" aria-label="{escape(title)}">
 <title>{escape(title)}</title>
 <style>{FONT_CSS}
 text{{font-family:'JBM','JetBrains Mono','SF Mono',Menlo,Consolas,monospace;}}
-.lbl{{font-size:11px;font-weight:700;letter-spacing:1.6px;}}
+.sc{{font-family:'FellSC','IM FELL English SC',Georgia,serif;font-size:16px;letter-spacing:0.6px;}}
+.it{{font-family:'Fell','IM FELL English',Georgia,serif;font-style:italic;font-size:18px;}}
 .val{{font-size:15px;}}
 </style>
 <defs>
@@ -98,8 +107,8 @@ text{{font-family:'JBM','JetBrains Mono','SF Mono',Menlo,Consolas,monospace;}}
 <rect width="{W}" height="{height}" rx="14" fill="{t['paper']}"/>
 <rect x="1" y="1" width="{W - 2}" height="{height - 2}" rx="13" fill="url(#g)" stroke="{t['rule']}" stroke-width="1"/>
 <g fill="none" stroke="{t['accent']}" stroke-width="2" stroke-linecap="square">{brackets}</g>
-<text x="40" y="50" class="lbl" fill="{t['accent']}">{escape(title.upper())}</text>
-<text x="{W - 40}" y="50" class="lbl" fill="{right_fill}" text-anchor="end">{escape(right_label)}</text>
+<text x="40" y="52" class="sc" fill="{t['faint']}">{escape(title)}</text>
+<text x="{W - 40}" y="52" class="sc" fill="{right_fill}" text-anchor="end">{escape(right_label)}</text>
 {body}
 </svg>
 """
@@ -141,7 +150,7 @@ def specimen(theme, d, sample):
     h = 356
     since = d["created"][:4]
     rows = [
-        ("HABITAT", "macOS · Everforest, six schemes"),
+        ("HABITAT", "macOS · Atlas Paper and Night, grown from Everforest"),
         ("GROWING", "Project Grove, set up by one installer"),
         ("APPS", "Grove Keys · Grove Explorer · Grove Themes"),
         ("TERMINAL", "Ghostty · zsh · Starship"),
@@ -150,14 +159,18 @@ def specimen(theme, d, sample):
         ("SINCE", f"{since} · {d['repos']} public repo{'' if d['repos'] == 1 else 's'}"),
     ]
     body = [
-        f'<text x="40" y="104" font-size="34" font-weight="700" fill="{t["accent"]}">&gt;</text>',
+        # the prompt is a mark, drawn rather than typed, so it may be orange
+        f'<path d="M44 80 L62 92 L44 104" fill="none" stroke="{t["accent"]}" stroke-width="4.5" stroke-linecap="square"/>',
         f'<text x="82" y="104" font-size="34" font-weight="700" fill="{t["ink"]}">{escape(LOGIN)}</text>',
         f'<rect x="{82 + len(LOGIN) * 20.4 + 6:.0f}" y="76" width="14" height="34" fill="{t["cursor"]}"/>',
     ]
     for i, (k, v) in enumerate(rows):
         y = 144 + i * 24
-        body.append(f'<text x="40" y="{y}" class="lbl" fill="{t["faint"]}">{k}</text>')
-        body.append(f'<text x="160" y="{y}" class="val" fill="{t["ink"]}">{escape(v)}</text>')
+        body.append(f'<text x="40" y="{y}" class="sc" fill="{t["faint"]}">{k.title()}</text>')
+        if k == "HABITAT":  # the one line in the surveyor's hand
+            body.append(f'<text x="160" y="{y}" class="it" fill="{t["ink"]}">{escape(v)}</text>')
+        else:
+            body.append(f'<text x="160" y="{y}" class="val" fill="{t["ink"]}">{escape(v)}</text>')
     for i, c in enumerate(t["dots"]):
         body.append(f'<circle cx="{48 + i * 22}" cy="{h - 44}" r="7" fill="{c}"/>')
 
@@ -172,9 +185,9 @@ def specimen(theme, d, sample):
         f'<line x1="{x0}" y1="{y}" x2="{cx - 34}" y2="{y}"/><line x1="{cx + 34}" y1="{y}" x2="{x1}" y2="{y}"/>'
         f'<path d="M{x0} {y}l7 -4v8z"/><path d="M{x1} {y}l-7 -4v8z"/>'
         f'<line x1="{x0}" y1="{y - 7}" x2="{x0}" y2="{y + 7}"/><line x1="{x1}" y1="{y - 7}" x2="{x1}" y2="{y + 7}"/></g>'
-        f'<text x="{cx}" y="{y + 4}" text-anchor="middle" font-size="12" fill="{t["accent"]}">{rings} rings</text>'
+        f'<text x="{cx}" y="{y + 4}" text-anchor="middle" font-size="12" fill="{t["ink"]}">{rings} rings</text>'
     )
-    return frame(theme, h, "Field notes · Fig.02 · specimen", "PINUS SYLVESTRIS", "\n".join(body), sample)
+    return frame(theme, h, "Field Notes · Fig.02 · Specimen", "Pinus sylvestris", "\n".join(body), sample)
 
 
 def stats(theme, d, sample):
@@ -192,21 +205,21 @@ def stats(theme, d, sample):
     for i, (label, value, note) in enumerate(metrics):
         col, row = i % 3, i // 3
         x, y = 40 + col * 138, 98 + row * 74
-        body.append(f'<text x="{x}" y="{y}" class="lbl" fill="{t["faint"]}">{label}</text>')
+        body.append(f'<text x="{x}" y="{y}" class="sc" fill="{t["faint"]}">{label.title()}</text>')
         body.append(f'<text x="{x}" y="{y + 30}" font-size="26" font-weight="700" fill="{t["ink"]}">{value:,}</text>')
         body.append(f'<text x="{x}" y="{y + 48}" font-size="11" fill="{t["muted"]}">{note}</text>')
 
     # languages
     lx, lw = 480, 320
     body.append(f'<line x1="{lx - 22}" y1="80" x2="{lx - 22}" y2="{h - 40}" stroke="{t["rule"]}" stroke-width="1"/>')
-    body.append(f'<text x="{lx}" y="98" class="lbl" fill="{t["faint"]}">TOP LANGUAGES</text>')
+    body.append(f'<text x="{lx}" y="98" class="sc" fill="{t["faint"]}">Top Languages</text>')
     # Shares are of the top five; a trace that would print as 0.0% is left out.
     langs = d["languages"][:5]
     total = sum(s for _, s in langs)
     langs = [(n, s) for n, s in langs if 100 * s / total >= 0.05] if total else []
     total = sum(s for _, s in langs)
     if not total:
-        body.append(f'<text x="{lx}" y="132" class="val" fill="{t["muted"]}">No specimens collected yet.</text>')
+        body.append(f'<text x="{lx}" y="132" class="it" fill="{t["muted"]}">No specimens collected yet.</text>')
     else:
         x = lx
         for i, (name, size) in enumerate(langs):
@@ -218,8 +231,8 @@ def stats(theme, d, sample):
             body.append(f'<circle cx="{lx + 5}" cy="{y - 4}" r="5" fill="{t["langs"][i]}"/>')
             body.append(f'<text x="{lx + 18}" y="{y}" font-size="13" fill="{t["ink"]}">{escape(name)}</text>')
             body.append(f'<text x="{lx + lw}" y="{y}" font-size="13" text-anchor="end" fill="{t["muted"]}">{100 * size / total:.1f}%</text>')
-    updated = dt.date.today().strftime("UPDATED %d %b %Y").upper()
-    return frame(theme, h, "Field notes · Fig.03 · measurements", updated, "\n".join(body), sample)
+    updated = dt.date.today().strftime("Updated %d %b %Y")
+    return frame(theme, h, "Field Notes · Fig.03 · Measurements", updated, "\n".join(body), sample)
 
 
 QUERY = """
