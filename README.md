@@ -12,7 +12,7 @@
 
 ### Field notes
 
-Notes from a Mac that is being rebuilt one config at a time. Everything here is drawn as a field atlas: parchment and slate, an orange marker, IM Fell English for what the surveyor writes and JetBrains Mono for the instruments. The colours are Atlas, grown from the [Everforest](https://github.com/sainnhe/everforest) palette by sainnhe. Every change is recorded, so the whole setup can be planted again on a fresh machine.
+Notes from a Mac that is being rebuilt one config at a time. Everything here is drawn as a field atlas: parchment and slate, an orange marker, IM Fell English for what the surveyor writes and JetBrains Mono for the instruments, and SF Pro for everything else. The colours are Atlas, grown from the [Everforest](https://github.com/sainnhe/everforest) palette by sainnhe. Every change is recorded, so the whole setup can be planted again on a fresh machine.
 
 ### [Project Grove](https://github.com/gmarques-x/project-grove)
 
